@@ -1,0 +1,19 @@
+// requete ajax jquery, callback
+
+$.get('url_server', function(res){
+  console.log(res)},
+  function (err){
+  console.log(error)
+  }
+})
+
+$.get('url_server')
+.then(res =>  console.log(res))
+.cathe(err =>  console.log(res))
+
+//requete ajax jquery, promise
+met promise = $.get('url_server')
+
+promise
+.then(res =>  return new)
+.cathe(err =>  console.log(res))

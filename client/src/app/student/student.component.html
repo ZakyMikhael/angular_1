@@ -1,35 +1,25 @@
-
 <div class="row student-card">
   <div class="col-md-6">
     <img class="thumb" [src]="student.image" alt="">
   </div>
   <div class="col-md-6">
-    <h3>{{student.prenom}} {{student.nom}}</h3>
+    <h3>
+      {{student.firstname}}
+      <a routerLink = "/students/{{student.id}}"> {{student.lastname}} </a></h3>
     <p>{{ student.group }}</p>
+
+    <!-- tableau des notes -->
     <table>
       <tr *ngFor="let note of student.notes; index as i">
         <td>Note {{ i+1 }}</td>
         <td>
           <strong *ngIf="!editMode">{{ note }}</strong>
           <input class="note" *ngIf="editMode" [value]="note"
-          (keyup) = "inputChange($event, i)">
+            (keyup)="inputChange($event, i)">
           <span> / 20</span>
-        </td>
-        <td>
-          <!-- <button
-            *ngIf="editMode"
-            (click)="changeNote(student.id, i)"
-            class="btn btn-primary btn-sm">Modifier</button> -->
         </td>
       </tr>
     </table>
-    <p> Moyenne : {{studentService.getAverage(student.notes)}}</p>
-
+    <p>Moyenne: {{studentService.getAverage(student.notes)}}</p>
   </div>
 </div>
-
-<!-- <button (click)="testAjax()">Test ajax</button>
-
-<div *ngFor="let image of images">
-  <img [id]="image.id" [src]="image.src" [alt]="image.alt">
-</div> -->

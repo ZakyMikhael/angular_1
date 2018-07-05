@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentService } from '../services/student.service';
-import {Student} from '../../interface/student.interface';
-
+import { Student } from '../../model/student.interface';
 
 @Component({
   selector: 'app-list-student',
@@ -9,7 +8,7 @@ import {Student} from '../../interface/student.interface';
   styleUrls: ['./list-student.component.css']
 })
 export class ListStudentComponent implements OnInit {
-  students: any[] = [];
+  students: Student[] = [];
   editMode: boolean = false;
   generalAverage: number = 0;
 
@@ -19,23 +18,10 @@ export class ListStudentComponent implements OnInit {
   ngOnInit() {
     this.studentService
       .getStudents()
-      .subscribe(res => {
+      .subscribe((res: Student[]) => {
         this.students = res;
         this.studentService.setStudents(res);
-        console.log (this.studentService.getGEneralAverage());
-
-        //caclul de la moyenne générale
-        let total = 0;
-        let nbNotes = 0;
-        this.students.forEach (student => {
-          //console.log(student.notes);
-          student.notes.forEach(note =>{
-          total += note;
-        })
-        nbNotes += student.notes.length;
-        //return total
-      })
-      this.generalAverage = total / nbNotes;
+        this.generalAverage = this.studentService.getGeneralAverage();
       });
   }
 
@@ -44,8 +30,8 @@ export class ListStudentComponent implements OnInit {
   }
 
   noteChange() {
-    console.log('Mon enfant me parle');
-    console.log =this.studentService.getGEneralAverage();
-
+    //console.log('Mon enfant me parle');
+    this.generalAverage = this.studentService.getGeneralAverage();
   }
+
 }

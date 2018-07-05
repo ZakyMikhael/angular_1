@@ -107,19 +107,46 @@ var players = [
   },
 ];
 
-var students = [ {id: 1, image:'http://cdn.sports.fr//images/media/football/transferts/articles/liverpool-salah-rouge-de-plaisir/klopp-et-salah/25590839-1-fre-FR/Klopp-et-Salah_w484.jpg',
-    prenom: 'Salah', nom: 'Mohammed', notes: [17, 15, 15], group: 'POEI Java'},
-    {id: 2, image:'http://cdn.sports.fr//images/media/football/transferts/articles/liverpool-salah-rouge-de-plaisir/klopp-et-salah/25590839-1-fre-FR/Klopp-et-Salah_w484.jpg',
-    prenom: 'Fermino', nom: 'Gmail', notes:[9, 5, 10], group: 'POEI Java'},
-    {id: 3, image:'http://cdn.sports.fr//images/media/football/transferts/articles/liverpool-salah-rouge-de-plaisir/klopp-et-salah/25590839-1-fre-FR/Klopp-et-Salah_w484.jpg',
-    prenom: 'Mané', nom: 'Mikhael', notes: [10, 17, 12], group: 'ESD'}
-  ]
+var students = [
+  {
+      id: 1,
+      image: 'https://www.thehindu.com/sport/football/article18590831.ece/alternates/FREE_300/Paulo%20Dybala',
+      firstname: 'Paolo',
+      lastname: 'Dybala',
+      notes: [13, 5, 7],
+      group: 'POEI Java'
+    },
+    {
+      id: 2,
+      image: 'https://www.thehindu.com/sport/football/article18590831.ece/alternates/FREE_300/Paulo%20Dybala',
+      firstname: 'Chris',
+      lastname: 'Chris',
+      notes: [19, 15, 17],
+      group: 'POEI Java'
+    },
+    {
+      id: 3,
+      image: 'https://www.thehindu.com/sport/football/article18590831.ece/alternates/FREE_300/Paulo%20Dybala',
+      firstname: 'Jean-François',
+      lastname: 'El Flouz',
+      notes: [4, 12, 20],
+      group: 'ESD'
+    },
+    {
+      id: 4,
+      image: 'https://www.thehindu.com/sport/football/article18590831.ece/alternates/FREE_300/Paulo%20Dybala',
+      firstname: 'Francesco',
+      lastname: 'Tutti Quanti',
+      notes: [10, 7, 2],
+      group: 'ESD'
+    }
+]
 
 // Middlewares
 app.use(bodyParser.json());
 //app.use(express.static('public'));
 
-//permet les requêtes cross-domain
+// Permet les requêtes cross-domain
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -128,14 +155,29 @@ app.use(function(req, res, next) {
 });
 
 // Routes
+
+// get
 app.get('/teams', (req, res) => res.json(teams));
 app.get('/students', (req, res) => res.json(students));
+app.get('/students/:id', (req, res) => {
+  let id = req.params.id;
+  for (let i=0; i<students.length; i++) {
+    if (students[i].id == id) {
+      return res.json(students[i]);  
+    }
+  }
+  res.status(404).send('Etudiant inconnu');
+});
+//return this.http.get(this.urlServer + '/students/' + id);
+
+app.get('/players', (req, res) => res.json(players));
 app.get('/teams/:team/players', (req, res) => {
   var team = req.params.team;
   var playersFiltered = players.filter(player => player.current_team == team);
   return res.json(playersFiltered);
 })
 
+// post
 app.post('/teams', function(req, res) {
   var id = getLastId(teams);
   var team = {
@@ -152,12 +194,12 @@ app.post('/teams', function(req, res) {
   res.json(team);
 })
 
-//PUT
-app.put('/students/:id', (req, res) =>{
-//mise à jour de l'étudiant ciblé
-  console.log (req.body); 
+// put
+app.put('/students/:id', (req, res) => {
   res.json('ok');
 })
+
+
 // Helper functions
 function getLastId(arr) {
   var maxId = 0;
