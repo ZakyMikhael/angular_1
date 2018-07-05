@@ -1,0 +1,20 @@
+<h2>Etudiants</h2>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <p>Moyenne générale: {{generalAverage}}</p>
+    </div>
+    <div class="col-md-4">
+      <input type="checkbox" (click)="changeEditMode($event)">
+      <span>Edit Mode</span>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+</div>
+
+<div class="container">
+  <app-student
+    *ngFor="let student of students"
+    [data]="student" [editMode]="editMode" (changeEmitter)="noteChange()"></app-student>
+</div>

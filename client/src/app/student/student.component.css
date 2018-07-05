@@ -1,0 +1,16 @@
+img.thumb {
+  width: 100px;
+  border: 1px #ccc solid
+}
+
+.student-card {
+  padding: 20px;
+  background-color: rgb(50, 100, 70);
+  color: white;
+  margin-bottom: 20px;
+  border-radius: 8px
+}
+
+.note {
+  width: 30px
+}

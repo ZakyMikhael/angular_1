@@ -1,0 +1,62 @@
+<p> Coucou </p>
+
+<!--The content below is only a placeholder and can be replaced.-->
+<h1 style="color:blue"> Angular: Introduction au Framework </h1>
+<!-- <p> {{message}} </p>  {{}} : propery binding (lecture) -->
+<!-- <span id="{{id}}" [innerText]="message"></span> -->
+
+<h2>student</h2>
+<!-- <p>{{student.name}}, ({{student.age}} ans)</p> -->
+
+<!-- <ul>
+  <li *ngFor = "let student of students">{{student}}</li>
+</ul>
+<p *ngFor = "let s of students">{{s}}</p> -->
+<!-- <table class="table table-bordered table-striped">
+  <tr>
+    <th>Nom</th>
+    <th>Equipe</th>
+    <th>Numéro</th>
+    <th>Etat de Forme</th>
+  </tr>
+  <tr *ngFor = "let player of players">
+    <td> {{player.name}}</td>
+    <td> {{player.team}}</td>
+    <td> {{player.num}}</td>
+    <td>
+      <span *ngIf = "player.injured" class="injured">Blessé</span>
+      <span *ngIf = "!player.injured">Opéraionnel</span>
+      </td>
+  </tr>
+</table> -->
+<button (click)="test()">Test </button>
+<span>{{compteur}}</span>
+<p *ngIf = "compteur ==10"> Basta !!! </p>
+<p [ngStyle]="style1"[ngClass]="{'visible':compteur ==10, 'not-visible': compteur !=10}"> Dosta Cosi!!! </p>
+//<input type="checkbox" (click) = "highlightStudents()"><span>Bons Etudiants </span>
+<select (change) = "selectGroup($event)">
+  <option value="0">Sélectionner un gorup</option>
+  <option *ngFor = "let group of groups"> {{group}}</option>
+</select >
+<table class="table table-bordered table-striped">
+    <tr>
+      <th>Photo</th>
+    <th>Prénom</th>
+    <th>Nom</th>
+    <th>Moyenne</th>
+    <th>Grpoup</th>
+
+  </tr>
+
+  <tr
+  *ngFor = "let student of students"
+  [ngStyle] = "{'display': student.group == selectedGroup || selectedGroup == '0'? 'table-row' : 'none'}">
+    <td>
+      <img class="student" [src]="student.image" [alt]="student.nom"> </td>
+    <td> {{student.prenom}}</td>
+    <td> {{student.nom}}</td>
+    <!-- <td [ngClass]= "{'good':getAverage(student.notes) >10,'bad':getAverage(student.notes) <10 }" > {{getAverage(student.notes)}} </td> -->
+      <td [ngClass]= "{'good':getAverage(student.notes) >10 && highlighGoodStudents }" > {{getAverage(student.notes)}} </td>
+    <td> {{student.group}}</td>
+  </tr>
+</table>
